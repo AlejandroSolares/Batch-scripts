@@ -6,7 +6,8 @@ SET /P host_name="HostName: "
 echo Puerto para probar: 
 echo.
 set num=0
-:Loop
+:loop
+   :Loop
 set /a num=num+1
 SET /P mwa_port%num%=""
 if "!mwa_port%num%!"=="" (goto Start)
@@ -21,6 +22,10 @@ for /L %%i in (1,1,%num%) do (
     IF %ERRORLEVEL% EQU 0 Echo No ocurrieron errores
 )
 :End
+   GetKey /N
+if %errorlevel% == 0 goto loop
+echo The key pressed have this code: %errorlevel%
 endlocal
 echo.
-SET /P leave="presiona cualquier tecla..."
+SET /P leave="presiona cualquier tecla para salir..."
+
